@@ -15,9 +15,12 @@ function imglyOptions() {
   const mobile =
     typeof navigator !== "undefined" &&
     /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const gpu = prefersGpu() && !mobile;
   return {
-    model: prefersGpu() && !mobile ? ("isnet" as const) : ("isnet_fp16" as const),
-    device: prefersGpu() ? ("gpu" as const) : ("cpu" as const),
+    publicPath:
+      "https://staticimgly.com/@imgly/background-removal-data/1.7.0/dist/",
+    model: gpu ? ("isnet_fp16" as const) : ("isnet_quint8" as const),
+    device: gpu ? ("gpu" as const) : ("cpu" as const),
     output: { format: "image/png" as const, quality: 0.95 },
   };
 }
