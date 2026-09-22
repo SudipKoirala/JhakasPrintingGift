@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Eraser, MessageCircle, RotateCcw } from "lucide-react";
 import { UploadZone } from "@/components/customizer/upload-zone";
+import { BackgroundChoiceDialog } from "@/components/customizer/background-choice-dialog";
 import { PreviewStage } from "@/components/customizer/preview-stage";
 import { OrderDialog } from "@/components/customizer/order-dialog";
 import { useDesignCanvas } from "@/components/customizer/use-design-canvas";
@@ -80,6 +81,7 @@ export function CustomizerStudio() {
     null,
   );
   const [processing, setProcessing] = useState(false);
+  const [backgroundChoiceOpen, setBackgroundChoiceOpen] = useState(false);
   const [orderOpen, setOrderOpen] = useState(false);
   const [sending, setSending] = useState(false);
   const [orderError, setOrderError] = useState<string | null>(null);
@@ -157,6 +159,7 @@ export function CustomizerStudio() {
       setRemovedDataUrl(null);
       setBackground("original");
       await addImage(dataUrl);
+      setBackgroundChoiceOpen(true);
     },
     [addImage],
   );
@@ -553,6 +556,16 @@ export function CustomizerStudio() {
         sending={sending}
         error={orderError}
         onSend={() => void sendOrder()}
+      />
+      <BackgroundChoiceDialog
+        open={backgroundChoiceOpen}
+        processing={processing}
+        onOpenChange={setBackgroundChoiceOpen}
+        onKeepOriginal={() => setBackgroundChoiceOpen(false)}
+        onRemoveBackground={() => {
+          setBackgroundChoiceOpen(false);
+          void handleBackground("removed");
+        }}
       />
     </div>
   );

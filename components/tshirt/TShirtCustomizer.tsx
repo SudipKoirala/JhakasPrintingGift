@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { IconChat } from "@/components/brand/icons";
 import { OrderDialog } from "@/components/customizer/order-dialog";
+import { BackgroundChoiceDialog } from "@/components/customizer/background-choice-dialog";
 import { CustomizationPanel } from "@/components/tshirt/CustomizationPanel";
 import { Button } from "@/components/ui/button";
 import { MAX_IMAGE_BYTES, type BackgroundMode } from "@/lib/constants";
@@ -53,6 +54,7 @@ export function TShirtCustomizer() {
     null,
   );
   const [processing, setProcessing] = useState(false);
+  const [backgroundChoiceOpen, setBackgroundChoiceOpen] = useState(false);
   const [orderOpen, setOrderOpen] = useState(false);
   const [sending, setSending] = useState(false);
   const [orderError, setOrderError] = useState<string | null>(null);
@@ -93,6 +95,7 @@ export function TShirtCustomizer() {
       setRemovedDataUrl(null);
       setBackground("original");
       setDesignImage(dataUrl);
+      setBackgroundChoiceOpen(true);
     },
     [setBackground, setDesignImage, setOriginalDataUrl, setRemovedDataUrl],
   );
@@ -361,6 +364,16 @@ export function TShirtCustomizer() {
         sending={sending}
         error={orderError}
         onSend={() => void sendOrder()}
+      />
+      <BackgroundChoiceDialog
+        open={backgroundChoiceOpen}
+        processing={processing}
+        onOpenChange={setBackgroundChoiceOpen}
+        onKeepOriginal={() => setBackgroundChoiceOpen(false)}
+        onRemoveBackground={() => {
+          setBackgroundChoiceOpen(false);
+          void handleBackground("removed");
+        }}
       />
     </div>
   );
