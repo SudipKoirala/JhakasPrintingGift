@@ -33,7 +33,10 @@ export type GalleryEntry = InspirationItem | SampleInspiration;
 export function isUploadedInspiration(
   item: GalleryEntry,
 ): item is InspirationItem {
-  return "imageUrl" in item || Boolean((item as InspirationItem).images?.length);
+  return (
+    "imageUrl" in item ||
+    ("images" in item && Array.isArray(item.images) && item.images.length > 0)
+  );
 }
 
 export function GalleryDetail({
@@ -45,7 +48,8 @@ export function GalleryDetail({
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
-  const photos = item && isUploadedInspiration(item) ? inspirationPhotos(item) : [];
+  const photos =
+    item && isUploadedInspiration(item) ? inspirationPhotos(item) : [];
   const [active, setActive] = useState(0);
   const [fullscreen, setFullscreen] = useState(false);
 
@@ -69,8 +73,10 @@ export function GalleryDetail({
         setActive((index) => (index + 1) % Math.max(photos.length, 1));
       }
       if (event.key === "ArrowLeft") {
-        setActive((index) =>
-          (index - 1 + Math.max(photos.length, 1)) % Math.max(photos.length, 1),
+        setActive(
+          (index) =>
+            (index - 1 + Math.max(photos.length, 1)) %
+            Math.max(photos.length, 1),
         );
       }
     }
@@ -151,7 +157,10 @@ export function GalleryDetail({
           ) : !uploaded ? (
             <div className="relative mx-auto max-w-xs overflow-hidden rounded-[22px]">
               <TShirtMockup color={item.color} view="front" />
-              <div className="absolute overflow-hidden" style={PRINT_AREA.front}>
+              <div
+                className="absolute overflow-hidden"
+                style={PRINT_AREA.front}
+              >
                 <SamplePrint name={item.sample} className="h-full w-full" />
               </div>
             </div>
@@ -181,8 +190,7 @@ export function GalleryDetail({
                 type="button"
                 onClick={() =>
                   setActive(
-                    (index) =>
-                      (index - 1 + photos.length) % photos.length,
+                    (index) => (index - 1 + photos.length) % photos.length,
                   )
                 }
                 className="absolute top-1/2 left-3 z-10 grid size-11 -translate-y-1/2 place-items-center rounded-full bg-white/10 hover:bg-white/16"
