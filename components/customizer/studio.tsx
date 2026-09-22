@@ -21,11 +21,7 @@ import {
   preloadBackgroundRemoval,
   removeImageBackground,
 } from "@/lib/remove-background";
-import {
-  allShirts,
-  loadAdminShirts,
-  type ShirtProduct,
-} from "@/lib/shirts";
+import { allShirts, loadAdminShirts, type ShirtProduct } from "@/lib/shirts";
 
 const SESSION_KEY = "sparktee-studio-v1";
 
@@ -116,7 +112,7 @@ export function CustomizerStudio() {
 
   useEffect(() => {
     if (ready) setDesignCanvas(canvasElRef.current);
-  }, [ready]);
+  }, [ready, canvasElRef]);
 
   useEffect(() => {
     if (!originalDataUrl) return;
@@ -416,7 +412,11 @@ export function CustomizerStudio() {
                       className="size-full object-cover"
                     />
                   ) : (
-                    <svg viewBox="0 0 24 24" className="size-7" aria-hidden="true">
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="size-7"
+                      aria-hidden="true"
+                    >
                       <path
                         fill={item.id === "white" ? "#d9d0c6" : "#f4efe8"}
                         d="M8.2 5.2 5 7.2 6.4 10.4 8.8 9v8.2c0 .6.5 1 1 1h4.4c.5 0 1-.4 1-1V9l2.4 1.4L19 7.2l-3.2-2C15.4 3.8 13.8 3 12 3s-3.4.8-3.8 2.2Z"

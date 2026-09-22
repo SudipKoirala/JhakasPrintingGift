@@ -129,7 +129,10 @@ export const DesignDecal = forwardRef<THREE.Mesh, { design: DesignConfig }>(
     if (!texture) return null;
 
     const image = texture.image as { width?: number; height?: number };
-    const aspect = Math.max(0.35, Math.min(2.8, (image.width || 1) / (image.height || 1)));
+    const aspect = Math.max(
+      0.35,
+      Math.min(2.8, (image.width || 1) / (image.height || 1)),
+    );
     const height = 0.3 * design.scale;
     const width = height * aspect;
     const limit = 0.48 * Math.max(design.scale, 0.7);
@@ -147,7 +150,6 @@ export const DesignDecal = forwardRef<THREE.Mesh, { design: DesignConfig }>(
         scale={[width * fit, height * fit, 0.24]}
         map={texture}
         depthTest
-        polygonOffset
         polygonOffsetFactor={-8}
       />
     );
