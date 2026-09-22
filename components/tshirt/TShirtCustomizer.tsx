@@ -186,7 +186,7 @@ export function TShirtCustomizer() {
 
       if (!designUpload.configured) {
         const text = [
-          "Hi Sparktee! I want this design printed.",
+          "Hi Jhakash Printing Gift! I want this design printed.",
           "",
           `Color: ${shirt.name}`,
           `Size: ${size}`,
@@ -311,9 +311,12 @@ export function TShirtCustomizer() {
               {processing ? (
                 <div className="absolute inset-0 z-10 grid place-items-center bg-white/55 backdrop-blur-[1px]">
                   <div className="rounded-2xl bg-white px-4 py-3 text-center shadow-[0_10px_30px_rgba(41,38,36,0.08)]">
-                    <p className="text-sm font-semibold">Cleaning up your image…</p>
+                    <p className="text-sm font-semibold">
+                      Cleaning up your image…
+                    </p>
                     <p className="mt-0.5 text-[11px] text-charcoal/55">
-                      First time can take a minute while the free AI model loads.
+                      First time can take a minute while the free AI model
+                      loads.
                     </p>
                   </div>
                 </div>
@@ -329,13 +332,19 @@ export function TShirtCustomizer() {
             onLocked={setLocked}
           />
           <p className="mt-2 text-center text-[11px] leading-relaxed text-charcoal/45">
-            Shirt spins the tee, Image moves your print, and Lock keeps that mode on.
+            Shirt spins the tee, Image moves your print, and Lock keeps that
+            mode on.
           </p>
         </div>
       </div>
 
       <div className="fixed inset-x-0 bottom-0 z-30 border-t border-charcoal/8 bg-cream/95 px-4 py-2.5 pb-[max(0.65rem,env(safe-area-inset-bottom))] backdrop-blur lg:hidden">
-        <Button variant="whatsapp" size="sm" className="w-full" onClick={openOrder}>
+        <Button
+          variant="whatsapp"
+          size="sm"
+          className="w-full"
+          onClick={openOrder}
+        >
           <IconChat className="size-4" />
           Send on WhatsApp
         </Button>

@@ -5,7 +5,8 @@ import { getCatalogInspiration } from "@/lib/catalog";
 
 export const metadata: Metadata = {
   title: "Gallery",
-  description: "A few ideas for what your custom Sparktee could look like.",
+  description:
+    "A few ideas for what your custom Jhakash Printing Gift could look like.",
 };
 
 export default async function GalleryPage() {

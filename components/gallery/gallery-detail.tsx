@@ -106,7 +106,7 @@ export function GalleryDetail({
               <DialogDescription>{description}</DialogDescription>
             ) : (
               <DialogDescription>
-                A Sparktee look you can use as a starting point.
+                A Jhakash Printing Gift look you can use as a starting point.
               </DialogDescription>
             )}
           </DialogHeader>

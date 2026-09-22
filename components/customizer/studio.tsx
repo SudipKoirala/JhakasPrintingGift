@@ -257,7 +257,7 @@ export function CustomizerStudio() {
 
       if (!designUpload.configured) {
         const text = [
-          "Hi Sparktee! I want this design printed.",
+          "Hi Jhakash Printing Gift! I want this design printed.",
           "",
           `Color: ${shirt.name}`,
           `Size: ${size}`,

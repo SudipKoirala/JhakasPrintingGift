@@ -1,5 +1,5 @@
 export const SITE = {
-  name: "Sparktee",
+  name: "Jhakash Printing Gift",
   tagline: "Custom T-shirts made from your ideas.",
   description:
     "Upload your image, customize your T-shirt, and see how it looks before you order. No account required — just send it to us on WhatsApp.",

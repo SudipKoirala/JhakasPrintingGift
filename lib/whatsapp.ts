@@ -22,7 +22,7 @@ export function buildOrderMessage(input: {
     input.background === "removed" ? "Background removed" : "Original image";
 
   const lines = [
-    "Hi Sparktee! I want this design printed.",
+    "Hi Jhakash Printing Gift! I want this design printed.",
     "",
     `Design: ${input.designUrl}`,
   ];

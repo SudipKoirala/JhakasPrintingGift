@@ -8,7 +8,7 @@ import { buildWhatsAppUrl } from "@/lib/whatsapp";
 export function SiteFooter() {
   const year = new Date().getFullYear();
   const whatsapp = buildWhatsAppUrl(
-    "Hi Sparktee! I have a question about a custom T-shirt.",
+    "Hi Jhakash Printing Gift! I have a question about a custom T-shirt.",
   );
 
   return (
@@ -29,7 +29,10 @@ export function SiteFooter() {
             <Link href="/customize" className="transition hover:text-charcoal">
               Customize
             </Link>
-            <Link href="/#how-it-works" className="transition hover:text-charcoal">
+            <Link
+              href="/#how-it-works"
+              className="transition hover:text-charcoal"
+            >
               How It Works
             </Link>
             <Link href="/gallery" className="transition hover:text-charcoal">

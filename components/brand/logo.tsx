@@ -31,7 +31,7 @@ export function Logo({
       </span>
       {wordmark ? (
         <span className="font-display text-xl font-extrabold tracking-tight">
-          Sparktee
+          Jhakash Printing Gift
         </span>
       ) : null}
     </span>
