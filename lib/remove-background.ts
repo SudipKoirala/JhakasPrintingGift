@@ -27,7 +27,15 @@ function imglyOptions() {
 
 async function removeWithImgly(dataUrl: string) {
   const { removeBackground } = await import("@imgly/background-removal");
-  const cleaned = await removeBackground(dataUrl, imglyOptions());
+  const cleaned = await Promise.race([
+    removeBackground(dataUrl, imglyOptions()),
+    new Promise<never>((_, reject) => {
+      window.setTimeout(
+        () => reject(new Error("browser_background_removal_timeout")),
+        90_000,
+      );
+    }),
+  ]);
   return fileToDataUrl(new File([cleaned], "removed.png", { type: "image/png" }));
 }
 
@@ -45,6 +53,9 @@ async function removeWithCloud(dataUrl: string) {
 }
 
 export async function removeImageBackground(dataUrl: string): Promise<string> {
+  const cloud = await removeWithCloud(dataUrl);
+  if (cloud) return cloud;
+
   if (canRunBirefnet()) {
     try {
       return await removeWithBirefnet(dataUrl);
@@ -56,8 +67,6 @@ export async function removeImageBackground(dataUrl: string): Promise<string> {
   try {
     return await removeWithImgly(dataUrl);
   } catch {
-    const cloud = await removeWithCloud(dataUrl);
-    if (cloud) return cloud;
     throw new Error("background_removal_failed");
   }
 }
