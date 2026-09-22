@@ -1,0 +1,199 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #ffffff;
+  --cream-deep: #f4efe8;
+  --charcoal: #292624;
+  --terracotta: #e87852;
+  --terracotta-deep: #d4633d;
+  --mustard: #f4c95d;
+  --sage: #9bb89c;
+  --whatsapp: #25d366;
+  --background: #ffffff;
+  --foreground: #292624;
+}
+
+@theme inline {
+  --color-cream: var(--cream);
+  --color-cream-deep: var(--cream-deep);
+  --color-charcoal: var(--charcoal);
+  --color-terracotta: var(--terracotta);
+  --color-terracotta-deep: var(--terracotta-deep);
+  --color-mustard: var(--mustard);
+  --color-sage: var(--sage);
+  --color-whatsapp: var(--whatsapp);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-plus-jakarta);
+  --shadow-soft: 0 10px 30px rgba(41, 38, 36, 0.08);
+  --shadow-lift: 0 16px 36px rgba(232, 120, 82, 0.22);
+}
+
+* {
+  border-color: color-mix(in srgb, var(--charcoal) 10%, transparent);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--charcoal);
+  font-family: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  background-image:
+    radial-gradient(ellipse at 0% -10%, rgba(232, 120, 82, 0.05), transparent 42%),
+    radial-gradient(ellipse at 100% 0%, rgba(244, 201, 93, 0.06), transparent 40%),
+    radial-gradient(rgba(41, 38, 36, 0.022) 0.7px, transparent 0.7px);
+  background-size: auto, auto, 16px 16px;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--mustard) 70%, white);
+  color: var(--charcoal);
+}
+
+.font-display {
+  letter-spacing: -0.04em;
+}
+
+.page-shell {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes sparkle-spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: rotate(18deg) scale(1.12);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-6deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-2deg);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+.animate-float-soft {
+  animation: float-soft 5.5s ease-in-out infinite;
+}
+
+.animate-sparkle {
+  animation: sparkle-spin 2.4s ease-in-out infinite;
+}
+
+.animate-bob {
+  animation: bob 4.5s ease-in-out infinite;
+}
+
+.reveal {
+  --reveal-delay: 0ms;
+  opacity: 0;
+  filter: blur(8px);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay),
+    filter 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay);
+  will-change: opacity, transform, filter;
+}
+
+.reveal-up {
+  transform: translate3d(0, 42px, 0);
+}
+
+.reveal-left {
+  transform: translate3d(-48px, 18px, 0);
+}
+
+.reveal-right {
+  transform: translate3d(48px, 18px, 0);
+}
+
+.reveal-scale {
+  transform: translate3d(0, 24px, 0) scale(0.94);
+}
+
+.reveal-fade {
+  transform: none;
+  filter: blur(4px);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+.reveal-line {
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.28s;
+}
+
+.reveal.is-visible .reveal-line {
+  transform: scaleX(1);
+}
+
+@media (scripting: none) {
+  .reveal,
+  .reveal-line {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-float-soft,
+  .animate-sparkle,
+  .animate-bob {
+    animation: none;
+  }
+
+  .reveal,
+  .reveal-line {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+}
